@@ -15,6 +15,7 @@ public class COMP258Labs {
      */
     public static void main(String[] args) {
         System.out.println("Setting up a git repository");
+        System.out.println("Lab 1 - Console Framework");
     }
     
 }
