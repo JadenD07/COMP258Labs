@@ -14,8 +14,8 @@ public class ArrayManagerProgram extends ConsoleFramework{
     
     
     public static void main(String[] args) {
-        ArrayManagerProgram alp = new ArrayManagerProgram();
-        alp.run();
+        ArrayManagerProgram amp = new ArrayManagerProgram();
+        amp.run();
     }
     
     public void startProgram(){
