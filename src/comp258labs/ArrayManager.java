@@ -73,7 +73,7 @@ public class ArrayManager {
         if(count>=items.length){
             temp = new Object[items.length+10];
         }else{
-            temp = new Object[items.length];
+            temp = new Object[items.length+1];
         }
         //copy 0-pos to new array
         System.arraycopy(items, 0, temp, 0, pos);
