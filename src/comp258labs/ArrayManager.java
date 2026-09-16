@@ -36,7 +36,10 @@ public class ArrayManager {
         return count;
     }
     
-    public Object get(int index){
+    public Object get(int index) throws OutOfBoundsException{
+        if(index<0 || index >= count){
+            throw new OutOfBoundsException();
+        }
         return items[index];
     }
     
@@ -50,7 +53,13 @@ public class ArrayManager {
         count++;
     }
     
-    public void remove(int pos){
+    public void remove(int pos) throws NoItemsException, OutOfBoundsException{
+        if(isEmpty())
+            throw new NoItemsException();
+        if(pos<0 || pos>=count)
+            throw new OutOfBoundsException();
+        
+        
         Object[] temp = new Object[items.length];
         System.arraycopy(items, 0, temp, 0, pos);
         System.arraycopy(items, pos+1, temp, pos, items.length-pos-1);
@@ -102,7 +111,19 @@ public class ArrayManager {
         System.out.println("After");
         am.addAt(55,0);
         am.addAt("Gandalf",5);
-        //am.remove(3);
+        try{
+            System.out.println("GET: " + am.get(120));
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        try{
+           am.remove(3); 
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }catch(OutOfBoundsException e){
+            System.out.println(e.toString());
+        }
+        
         am.print();
         //am.printArray();
     }
