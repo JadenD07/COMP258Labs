@@ -89,8 +89,6 @@ public class LinkedList {
             temp.next=n;
             n.next=current;
             current=n;
-            
-            
         }
     }
     
