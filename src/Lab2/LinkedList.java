@@ -76,8 +76,43 @@ public class LinkedList {
         }
     }
     
+    public void addBefore(Object item){
+        Node temp = items;
+        Node n = new Node(item);
+        if(items==null){
+            items = n;
+            current = items;
+        }else{
+            while(temp.next!=current){
+                temp=temp.next;
+            }
+            temp.next=n;
+            n.next=current;
+            current=n;
+            
+            
+        }
+    }
+    
+    public void removeCurrent(){
+        
+        Node temp = items;
+        if(temp == current){
+            //only 1 item in list
+            items=null;
+            current=null;
+        }else{
+            while(temp.next!=current){
+                temp=temp.next;
+            }
+            temp.next=current.next; //or temp.next = temp.next.next;
+            current = temp.next;
+        }
+    }
+    
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
+        list.removeCurrent();
         list.add(11);
         list.add(77);
         list.add(99);
@@ -87,6 +122,10 @@ public class LinkedList {
         list.advance();
         list.advance();
         list.addAfter(66);
+        list.addBefore(65);
+        list.addBefore(64);
+        list.addBefore(63);
+        
         list.print();
     }
 }
