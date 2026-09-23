@@ -82,6 +82,10 @@ public class LinkedList {
         if(items==null){
             items = n;
             current = items;
+        }else if(current==items){
+            n.next = items;
+            items = n;
+            current = n;
         }else{
             while(temp.next!=current){
                 temp=temp.next;

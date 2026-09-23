@@ -14,6 +14,11 @@ public class LinkedListProgram extends ConsoleFramework{
     
     LinkedList numbers = new LinkedList();
     
+    public static void main(String[] args) {
+        LinkedListProgram llp = new LinkedListProgram();
+        llp.run();
+    }
+    
     public void startProgram(){
         int capacity = 20;
         numbers = new LinkedList();
@@ -62,14 +67,18 @@ public class LinkedListProgram extends ConsoleFramework{
     }
     
     public void addBefore(){
-        
+        int value = this.readInt("Number: ");
+        numbers.addBefore(value);
+        System.out.println("Added: " + value);
     }
     public void addAfter(){
-        
+        int value = this.readInt("Number: ");
+        numbers.addAfter(value);
+        System.out.println("Added: " + value);
     }
     
     public void printAll(){
-        
+        numbers.print();
     }
     
     public void getCurrent(){
