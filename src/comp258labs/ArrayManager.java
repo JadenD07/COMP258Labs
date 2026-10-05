@@ -4,6 +4,9 @@
  */
 package comp258labs;
 
+import Exceptions.NoItemsException;
+import Exceptions.OutOfBoundsException;
+
 /**
  *
  * @author jaden
@@ -66,6 +69,15 @@ public class ArrayManager {
         items=temp;
     }
     
+    public void removeAllOccurances(Object o) throws NoItemsException, OutOfBoundsException{
+
+        for(int i=0; i<items.length; i++){
+            if(o == items[i]){
+                remove(i);
+            }
+        }
+    }
+    
     public void addAt(Object item, int pos){
         //resize the array if needed
         Object[] temp;
@@ -123,7 +135,17 @@ public class ArrayManager {
         }catch(OutOfBoundsException e){
             System.out.println(e.toString());
         }
-        
+        am.add(15);
+        System.out.println("Before removeAllOccurances of 15 Test:");
+        am.print();
+        try{
+            am.removeAllOccurances(15);
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }catch(OutOfBoundsException e){
+            System.out.println(e.toString());
+        }
+        System.out.println("After removeAllOccurances of 15 Test:");
         am.print();
         //am.printArray();
     }

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Lab2;
-
+import Exceptions.NoItemsException;
 /**
  *
  * @author jaden
@@ -96,10 +96,17 @@ public class LinkedList {
         }
     }
     
-    public void removeCurrent(){
+    public void removeCurrent() throws NoItemsException{
         
         Node temp = items;
-        if(temp == current){
+        if(items==null){
+          throw new NoItemsException();  
+        }
+        if(current == items){
+            items=items.next;
+            current=items;
+        }
+        else if(temp == current){
             //only 1 item in list
             items=null;
             current=null;
@@ -112,22 +119,48 @@ public class LinkedList {
         }
     }
     
+    public void removeAllOccurances(Object o) throws NoItemsException{
+        
+        start();
+        while(current.next!=null){
+            if(current.getData()==o){
+                removeCurrent();
+            }else{
+                current = current.next;
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        list.removeCurrent();
+        try{
+           list.removeCurrent(); 
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }
+        
+        list.add(65);
         list.add(11);
         list.add(77);
         list.add(99);
-        list.add(55);
+        list.add(65);
         list.add(33);
         list.start();
         list.advance();
         list.advance();
         list.addAfter(66);
-        list.addBefore(65);
         list.addBefore(64);
-        list.addBefore(63);
-        
+        list.addBefore(65);
+        list.addBefore(65);
+ 
+        System.out.println("Before removeAllOccurances of 65: ");
+        list.print();
+        System.out.println("After removeAllOccurances of 65: ");
+        try{
+            list.removeAllOccurances(65);
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }
         list.print();
     }
 }
