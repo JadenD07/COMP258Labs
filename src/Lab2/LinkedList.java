@@ -107,27 +107,41 @@ public class LinkedList {
             current=items;
         }
         else if(temp == current){
+        if(items==null){                    
+          throw new NoItemsException();     
+        }
+        if(current == items){              
+            items=items.next;
+            current=items;
+        }
+        else if(temp == current){          
             //only 1 item in list
             items=null;
             current=null;
         }else{
-            while(temp.next!=current){
+            while(temp.next!=current){      
                 temp=temp.next;
             }
             temp.next=current.next; //or temp.next = temp.next.next;
             current = temp.next;
         }
+        }
     }
     
     public void removeAllOccurances(Object o) throws NoItemsException{
-        
         start();
         while(current.next!=null){
             if(current.getData()==o){
                 removeCurrent();
+        start();                           
+        while(current.next!=null){          
+            if(current.getData()==o){       
+                removeCurrent();            
             }else{
                 current = current.next;
             }
+        }
+    }
         }
     }
     
@@ -162,5 +176,25 @@ public class LinkedList {
             System.out.println(e.toString());
         }
         list.print();
+    }
+    
+    public void recursivePrint(){
+        recursivePrint(items);
+    }
+    public void recursivePrint(Node temp){
+        if(temp==null)
+            return;
+        System.out.println(temp.getData());
+        recursivePrint(temp.next);
+    }
+    
+    public void recursivePrintReverse(){
+        recursivePrintReverse(items);
+    }
+    public void recursivePrintReverse(Node temp){
+        if(temp==null)
+            return;
+        recursivePrintReverse(temp.next);
+        System.out.println(temp.getData());
     }
 }

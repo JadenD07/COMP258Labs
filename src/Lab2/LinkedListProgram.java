@@ -5,6 +5,7 @@
 package Lab2;
 
 import FrameWork.ConsoleFramework;
+import Exceptions.NoItemsException;
 
 /**
  *
@@ -95,7 +96,16 @@ public class LinkedListProgram extends ConsoleFramework{
     }
     
     public void delete(){
+        try{
         numbers.removeCurrent();
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }
+        try{
+        numbers.removeCurrent();
+        }catch(NoItemsException e){
+            System.out.println(e.toString());
+        }
         System.out.println("Current removed: Current now="+numbers.getCurrent());
     }
     

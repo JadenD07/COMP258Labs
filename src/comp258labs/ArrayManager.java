@@ -12,105 +12,110 @@ import Exceptions.OutOfBoundsException;
  * @author jaden
  */
 public class ArrayManager {
-    
+
     private Object[] items;
     private int count; //the number of items used in the array
-    
-    public ArrayManager(){
+
+    public ArrayManager() {
         items = new Object[5];
         count = 0;
     }
-    
-    public ArrayManager(int capacity){
+
+    public ArrayManager(int capacity) {
         items = new Object[capacity];
         count = 0;
     }
-    
-    public ArrayManager(Object[] items){
+
+    public ArrayManager(Object[] items) {
         this.items = items;
         count = items.length;
     }
-    
-    public boolean isEmpty(){
-        return count==0;
+
+    public boolean isEmpty() {
+        return count == 0;
     }
-    
-    public int size(){
+
+    public int size() {
         return count;
     }
-    
-    public Object get(int index) throws OutOfBoundsException{
-        if(index<0 || index >= count){
+
+    public Object get(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= count) {
             throw new OutOfBoundsException();
         }
         return items[index];
     }
-    
-    public void add(Object item){
-        if(count>=items.length){
-            Object[] temp = new Object[items.length+10];
-            System.arraycopy(items,0,temp,0,count);
+
+    public void add(Object item) {
+        if (count >= items.length) {
+            Object[] temp = new Object[items.length + 10];
+            System.arraycopy(items, 0, temp, 0, count);
             items = temp;
         }
         items[count] = item;
         count++;
     }
-    
-    public void remove(int pos) throws NoItemsException, OutOfBoundsException{
-        if(isEmpty())
+
+    public void remove(int pos) throws NoItemsException, OutOfBoundsException {
+        if (isEmpty()) {
             throw new NoItemsException();
-        if(pos<0 || pos>=count)
+        }
+        if (pos < 0 || pos >= count) {
+            if (isEmpty()) {
+                throw new NoItemsException();
+            }
+        }
+        if (pos < 0 || pos >= count) {
             throw new OutOfBoundsException();
-        
-        
+        }
+
         Object[] temp = new Object[items.length];
         System.arraycopy(items, 0, temp, 0, pos);
-        System.arraycopy(items, pos+1, temp, pos, items.length-pos-1);
-        items=temp;
+        System.arraycopy(items, pos + 1, temp, pos, items.length - pos - 1);
+        items = temp;
     }
-    
-    public void removeAllOccurances(Object o) throws NoItemsException, OutOfBoundsException{
 
-        for(int i=0; i<items.length; i++){
-            if(o == items[i]){
+    public void removeAllOccurances(Object o) throws NoItemsException, OutOfBoundsException {
+        for (int i = 0; i < items.length; i++) {
+            if (o == items[i]) {
                 remove(i);
             }
         }
     }
-    
-    public void addAt(Object item, int pos){
+
+    public void addAt(Object item, int pos) {
         //resize the array if needed
         Object[] temp;
-        
-        if(count>=items.length){
-            temp = new Object[items.length+10];
-        }else{
-            temp = new Object[items.length+1];
+
+        if (count >= items.length) {
+            temp = new Object[items.length + 10];
+        } else {
+            temp = new Object[items.length + 1];
         }
         //copy 0-pos to new array
         System.arraycopy(items, 0, temp, 0, pos);
         //add item to pos
         temp[pos] = item;
         //copy pos-end to new array
-        System.arraycopy(items, pos, temp, pos+1, items.length-pos-1);
+        System.arraycopy(items, pos, temp, pos + 1, items.length - pos - 1);
         //assign new array back to items
-        items=temp;
-        
+        items = temp;
+
         count++;
     }
-    
-    public void print(){
-        for(int i=0; i<count; i++){
+
+    public void print() {
+        for (int i = 0; i < count; i++) {
             System.out.println(items[i]);
         }
     }
-    
-    public void printArray(){
-        for(int i=0; i<items.length; i++){
+
+    public void printArray() {
+        for (int i = 0; i < items.length; i++) {
             System.out.println(items[i]);
         }
     }
-    
+
     public static void main(String[] args) {
         ArrayManager am = new ArrayManager();
         am.add(5);
@@ -121,28 +126,28 @@ public class ArrayManager {
         am.add(2);
         am.print();
         System.out.println("After");
-        am.addAt(55,0);
-        am.addAt("Gandalf",5);
-        try{
+        am.addAt(55, 0);
+        am.addAt("Gandalf", 5);
+        try {
             System.out.println("GET: " + am.get(120));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
-        try{
-           am.remove(3); 
-        }catch(NoItemsException e){
+        try {
+            am.remove(3);
+        } catch (NoItemsException e) {
             System.out.println(e.toString());
-        }catch(OutOfBoundsException e){
+        } catch (OutOfBoundsException e) {
             System.out.println(e.toString());
         }
         am.add(15);
         System.out.println("Before removeAllOccurances of 15 Test:");
         am.print();
-        try{
+        try {
             am.removeAllOccurances(15);
-        }catch(NoItemsException e){
+        } catch (NoItemsException e) {
             System.out.println(e.toString());
-        }catch(OutOfBoundsException e){
+        } catch (OutOfBoundsException e) {
             System.out.println(e.toString());
         }
         System.out.println("After removeAllOccurances of 15 Test:");
