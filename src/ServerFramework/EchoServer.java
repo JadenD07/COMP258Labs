@@ -1,5 +1,7 @@
 package ServerFramework;
 
+import java.util.ArrayList;
+
 public class EchoServer extends AbstractServer 
 {
   //Class variables *************************************************
@@ -72,14 +74,41 @@ public class EchoServer extends AbstractServer
       }
       else if(env.getCommand().equals("pm")){
           String user = env.getArg1();
-          String msg = env.getArg2();
+          String msg = env.getArg2().toString();
           
+          msg = "From: " + client.getInfo("userName") + ":" + msg;
           this.sendToAClient(msg, user);
+      }
+      else if(env.getCommand().equals("yell")){
+          this.sendToAllClients(client.getInfo("userName") + " yelled: " + env.getArg1());
+      }
+      else if(env.getCommand().equals("who")){
+          ArrayList<String> users = getUsers();
+          env.setArg2(users);
+          this.sendDirectlyToClient(env, client);
+          
       }
       
   }
   
-  public void sendDirectlyToClient(String message, ConnectionToClient client){
+  public ArrayList<String> getUsers(){
+      
+        ArrayList<String> users = new ArrayList<>();
+        Thread[] clientThreadList = getClientConnections();
+
+        for (int i = 0; i < clientThreadList.length; i++) {
+
+            ConnectionToClient c2c = (ConnectionToClient) clientThreadList[i];
+            String user = c2c.getInfo("userName").toString();
+            users.add(user);
+
+        }
+        System.out.println("count:" +users.size());
+        return users;
+    }
+  
+  
+  public void sendDirectlyToClient(Object message, ConnectionToClient client){
       try{
               client.sendToClient(message);
           }catch(Exception e){

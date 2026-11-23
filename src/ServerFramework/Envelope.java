@@ -13,15 +13,21 @@ public class Envelope implements Serializable{
     
     private String command;
     private String arg1;
-    private String arg2;
+    private Object arg2;
 
     public Envelope() {
     }
 
-    public Envelope(String command, String arg1, String arg2) {
+    public Envelope(String command, String arg1, Object arg2) {
         this.command = command;
         this.arg1 = arg1;
         this.arg2 = arg2;
+    }
+    
+    public Envelope(String command, String arg1) {
+        this.command = command;
+        this.arg1 = arg1;
+        this.arg2 = null;
     }
 
     public String getCommand() {
@@ -40,11 +46,11 @@ public class Envelope implements Serializable{
         this.arg1 = arg1;
     }
 
-    public String getArg2() {
+    public Object getArg2() {
         return arg2;
     }
 
-    public void setArg2(String arg2) {
+    public void setArg2(Object arg2) {
         this.arg2 = arg2;
     }
     

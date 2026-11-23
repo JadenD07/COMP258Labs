@@ -1,6 +1,7 @@
 
 package ServerFramework;
 import java.io.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -52,7 +53,9 @@ public class ClientConsole implements ChatIF
         userName = args[2];
         System.out.println("User Name: "+userName);
     }catch(ArrayIndexOutOfBoundsException e){
-        userName = "anonymous";
+        
+        //userName = "anonymous";
+        userName = JOptionPane.showInputDialog("Enter User Name: ");
     }
     ClientConsole chat= new ClientConsole(host, port, userName);
     chat.accept();  //Wait for console data

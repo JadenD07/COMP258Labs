@@ -2,6 +2,9 @@
 package ServerFramework;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class overrides some of the methods defined in the abstract
@@ -66,7 +69,24 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-    clientUI.display(msg.toString());
+      if(msg instanceof Envelope){
+          handleEnvelopeFromServer(msg);
+      }else{
+          clientUI.display(msg.toString());
+      }
+  }
+  
+  public void handleEnvelopeFromServer(Object msg){
+      Envelope env = (Envelope)msg;
+      if(env.getCommand().equals("who")){
+          ArrayList<String> users = (ArrayList<String>)env.getArg2();
+          System.out.println("count:"+users.size());
+          for(int i=0; i<users.size(); i++){
+              
+              clientUI.display(users.get(i));
+          }
+          
+      }
   }
 
   /**
@@ -165,6 +185,29 @@ public class ChatClient extends AbstractClient
                 String arg = message.substring(message.indexOf(" "), message.length());
                 arg = arg.trim();
                 env = new Envelope(command, arg, "");
+            }
+            else if(message.indexOf("#pm")==0){
+                String command = "pm";
+                String args[] = message.split(" ");
+                String arg1 = args[1];
+                String arg2 = args[2];
+                env = new Envelope();
+                env.setCommand(command);
+                env.setArg1(arg1);
+                
+                arg2 = message.substring(message.indexOf(arg1)+arg1.length(), message.length());
+                
+                env.setArg2(arg2); 
+            }
+            else if(message.indexOf("#yell")==0){
+                String command = "yell";
+                String arg1 = message.substring(message.indexOf(" "), message.length());
+                arg1 = arg1.trim();
+                env = new Envelope(command, arg1);
+            }
+            else if(message.indexOf("#who")==0){
+                env = new Envelope();
+                env.setCommand("who");
             }
             try {
                 sendToServer(env);
