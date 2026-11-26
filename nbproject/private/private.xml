@@ -5,12 +5,13 @@
         <group>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/EchoServer.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/ClientConsole.java</file>
-            <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/AbstractServer.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/ConnectionToClient.java</file>
+            <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/AbstractServer.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/ChatClient.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/AbstractClient.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/ChatIF.java</file>
             <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/Envelope.java</file>
+            <file>file:/C:/Users/jaden/Documents/NetBeansProjects/COMP258Labs/src/ServerFramework/GUIConsole.java</file>
         </group>
     </open-files>
 </project-private>
